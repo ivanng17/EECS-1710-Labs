@@ -11,6 +11,7 @@ int cost5 = 10;
 int cost10 = 50;
 int cost25 = 100;
 int counter;
+
 PFont clickFont;
 PFont subtitleFont;
 
@@ -20,7 +21,6 @@ void setup(){
   
   clickFont = createFont("Arial", 24, true);
   subtitleFont = createFont("Arial", 16, true);
-  
   
   grades[0] = loadImage("F.png");
   grades[1] = loadImage("D.png");
@@ -34,9 +34,6 @@ void setup(){
   typer25 = loadImage("typer25.png");
   
   gameover = loadImage("gameover.png");
-  
-  backImg = loadImage("paper.png");
-  background(backImg);
   
   textFont(subtitleFont);
   fill(0, 0, 0);
@@ -57,7 +54,8 @@ void setup(){
 
 void draw(){
  
- 
+  backImg = loadImage("paper.png");
+  background(backImg);
   
   pencil = loadImage("pencil.png");
   
@@ -73,7 +71,7 @@ void draw(){
   textFont(subtitleFont);
   fill(0, 0, 0);
   textAlign(LEFT);
-  text("Press the pencil 10,000 times to get an A+!", 50, 65, 200, 100);
+  text("Press the pencil 25,000 times to get an A+!", 50, 65, 200, 100);
   
   textFont(clickFont);
   fill(0, 0, 0);
@@ -113,76 +111,76 @@ void draw(){
   fill(0, 0, 0);
   textAlign(CENTER);
   text(clickAmount + " points per click", 50, 310, 200, 100);
-}
-
-void mousePressed(){
-  if ((mouseX <= width/2 + 150 && mouseX >= width/2 - 150) && (mouseY <= height/2 + 150 && mouseY >= height/2 - 150)){ //code referenced from https://stackoverflow.com/questions/19373880/how-to-know-if-the-mouse-click-is-over-a-graphics-image-java
-    backImg = loadImage("paper.png");
-    background(backImg);
-
-    image(pencil, width/2, height/2, 250, 250);
-    counter += clickAmount;
-  }
   
-  
-  if ((mouseX <= width/2 - width/4 + 50 && mouseX >= width/2 - width/4 - 50) && (mouseY <= height/2 + height/4 + height/8 + 50 && mouseY >= height/2 + height/4 + height/8 - 50)){ 
-    if (counter >= cost5){
-    clickAmount += 5;
-    counter -= cost5;
-    backImg = loadImage("paper.png");
-    background(backImg);
-    cost5 *= 2;
-    }
-  }
-  if ((mouseX <= width/2 + 50 && mouseX >= width/2 - 50) && (mouseY <= height/2 + height/4 + height/8 + 50 && mouseY >= height/2 + height/4 + height/8 - 50)){ 
-    if (counter >= cost10){
-    clickAmount += 10;
-    counter -= cost10;
-    backImg = loadImage("paper.png");
-    background(backImg);
-    cost10 *= 3;
-    }
-  }
-  if ((mouseX <= width/2 + width/4 + 50 && mouseX >= width/2 + width/4 - 50) && (mouseY <= height/2 + height/4 + height/8 + 50 && mouseY >= height/2 + height/4 + height/8 - 50)){ 
-    if (counter >= cost25){
-    clickAmount += 25;
-    counter -= cost25;
-    backImg = loadImage("paper.png");
-    background(backImg);
-    cost25 *= 4;
-    }
-  }
+    
   
   if (counter == 0){
   imageMode(CENTER);
   image(grades[0], (width/2 + 300), (width/2 - 300));
   }
-  else if (counter <= 1000 && counter > 0){
+  else if (counter <= 5000 && counter > 0){
   imageMode(CENTER);
   image(grades[0], (width/2 + 300), (width/2 - 300));
   }
-  else if (counter <= 2000 && counter > 1000){
+  else if (counter <= 10000 && counter > 5000){
   imageMode(CENTER);
   image(grades[1], (width/2 + 300), (width/2 - 300));
   }
-  else if (counter <= 3000 && counter > 2000){
+  else if (counter <= 15000 && counter > 10000){
   imageMode(CENTER);
   image(grades[2], (width/2 + 300), (width/2 - 300));
   }
-  else if (counter <= 6000 && counter > 3000){
+  else if (counter <= 20000 && counter > 15000){
   imageMode(CENTER);
   image(grades[3], (width/2 + 300), (width/2 - 300));
   }
-  else if (counter <= 9999 && counter > 6000){
+  else if (counter <= 24999 && counter > 20000){
   imageMode(CENTER);
   image(grades[4], (width/2 + 300), (width/2 - 300));
   }
-  else if (counter >= 10000){
+  else if (counter >= 25000){
   imageMode(CENTER);
   image(grades[5], (width/2 + 300), (width/2 - 300));
   imageMode(CENTER);
-  image(gameover, width/2 + 300, height/2, 200, 150);
+  image(gameover, width/2, height/2, 800, 600);
   }
   
   
-} 
+}
+
+void mousePressed(){
+  if ((mouseX <= width/2 + 150 && mouseX >= width/2 - 150) && (mouseY <= height/2 + 150 && mouseY >= height/2 - 150) && counter < 25000){ //code referenced from https://stackoverflow.com/questions/19373880/how-to-know-if-the-mouse-click-is-over-a-graphics-image-java
+    
+    tint(255, 127);
+    image(pencil, width/2, height/2, 350, 350);
+    tint(255, 255);
+    counter += clickAmount;
+  }
+  
+  
+  if ((mouseX <= width/2 - width/4 + 50 && mouseX >= width/2 - width/4 - 50) && (mouseY <= height/2 + height/4 + height/8 + 50 && mouseY >= height/2 + height/4 + height/8 - 50) && counter < 25000){ 
+    if (counter >= cost5){
+    clickAmount += 5;
+    counter -= cost5;
+    cost5 *= 2;
+    }
+  }
+  
+  if ((mouseX <= width/2 + 50 && mouseX >= width/2 - 50) && (mouseY <= height/2 + height/4 + height/8 + 50 && mouseY >= height/2 + height/4 + height/8 - 50) && counter < 25000){ 
+    if (counter >= cost10){
+    clickAmount += 10;
+    counter -= cost10;
+    cost10 *= 3;
+    }
+  }
+  
+  if ((mouseX <= width/2 + width/4 + 50 && mouseX >= width/2 + width/4 - 50) && (mouseY <= height/2 + height/4 + height/8 + 50 && mouseY >= height/2 + height/4 + height/8 - 50) && counter < 25000){ 
+    if (counter >= cost25){
+    clickAmount += 25;
+    counter -= cost25;
+    cost25 *= 4;
+    }
+  }
+  }
+
+  
