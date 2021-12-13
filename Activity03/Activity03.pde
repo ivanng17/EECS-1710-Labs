@@ -1,6 +1,8 @@
 PImage img;
 PImage red, green, blue;
-int c1, c2, c3;
+int c1 = 255;
+int c2 = 0;
+int c3 = 0;
 
 void setup() {
   size(640, 480, P2D);  
