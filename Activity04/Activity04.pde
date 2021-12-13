@@ -1,8 +1,3 @@
-/**
- * This is a simple sound file player. Use the mouse position to control playback
- * speed, amplitude and stereo panning.
- */
-
 import processing.sound.*;
 SoundFile soundfile;
 PImage bgImage;
@@ -16,22 +11,12 @@ void setup() {
   
   bgImage = loadImage("sonic.png"); // deviantart.com/modernlixes/art/Classic-Sonic-Running-673550458
   ring = loadImage("ring.png"); // https://www.deviantart.com/nuryrush/art/Ring-Render-650084939
-  // Load a soundfile
+
   soundfile = new SoundFile(this, "Green Hill Zone.mp3"); //https://archive.org/details/SonicTheHedgehogGreenHillZoneTheme //
-
-  // These methods return useful infos about the file
-  println("SFSampleRate= " + soundfile.sampleRate() + " Hz");
-  println("SFSamples= " + soundfile.frames() + " samples");
-  println("SFDuration= " + soundfile.duration() + " seconds");
-
-  // Play the file in a loop
   soundfile.loop();
-  
-
 }      
 
 void draw() {
-    
 
   //playSpeed
   float playbackSpeed = map(mouseX, 0, width, 0.25, 2.0);
@@ -49,7 +34,7 @@ void draw() {
   
   imageMode(CENTER);
   image(bgImage, width/2, height/2, bgImage.width, bgImage.height);
-  tint(0, 0, 0);
+  noTint();
   
   imageMode(CENTER);
   image(ring, mouseX, mouseY, 50, 50);
